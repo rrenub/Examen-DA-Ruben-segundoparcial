@@ -46,6 +46,7 @@ public class ProductListPresenter implements ProductListContract.Presenter {
         Log.e(TAG, "onRestart()");
 
         //TODO: falta implementacion
+        model.onRestartScreen(state.datasource, state.data);
     }
 
     @Override
@@ -63,6 +64,8 @@ public class ProductListPresenter implements ProductListContract.Presenter {
         }
 
         state.datasource = model.getStoredDatasource();
+        state.data = model.getStoredData();
+
         view.get().onDataUpdated(state);
         //TODO: falta implementacion
 

@@ -36,6 +36,12 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
         Log.e(TAG, "onRestart()");
 
         //TODO: falta implementacion
+        model.onRestartScreen(state.data);
+        if(state.data == null) {
+            Log.d(TAG, "Es igual al null");
+        } else {
+            Log.d(TAG, "Es distinto de null");
+        }
     }
 
     @Override

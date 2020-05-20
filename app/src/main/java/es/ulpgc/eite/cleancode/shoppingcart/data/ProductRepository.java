@@ -37,4 +37,8 @@ public class ProductRepository implements RepositoryContract{
         products.get(productIndex).value = data.value;
         products.get(productIndex).content = data.content;
     }
+
+    public static void reinstance() { // for testing
+        INSTANCE = new ProductRepository();
+    }
 }

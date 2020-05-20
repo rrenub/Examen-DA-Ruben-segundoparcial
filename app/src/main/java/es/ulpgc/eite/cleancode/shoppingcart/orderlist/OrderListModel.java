@@ -6,11 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.ulpgc.eite.cleancode.shoppingcart.data.OrderData;
+import es.ulpgc.eite.cleancode.shoppingcart.data.ProductRepository;
 import es.ulpgc.eite.cleancode.shoppingcart.data.ProductStore;
+import es.ulpgc.eite.cleancode.shoppingcart.data.RepositoryContract;
 
 public class OrderListModel implements OrderListContract.Model {
 
     public static String TAG = OrderListModel.class.getSimpleName();
+
+    private RepositoryContract repository;
 
     private OrderData data;
     private List<OrderData> datasource;
@@ -18,6 +22,7 @@ public class OrderListModel implements OrderListContract.Model {
 
     public OrderListModel() {
         //TODO: falta implementacion
+        this.repository = repository;
         datasource = new ArrayList<>();
         currentOrder = 1;
     }
@@ -32,7 +37,7 @@ public class OrderListModel implements OrderListContract.Model {
     @Override
     public void updateOrder(OrderData order) {
         int orderIndex = datasource.indexOf(order);
-        Log.d(TAG, "El index es: " + orderIndex);
+        Log.d(TAG, "El index es: " + orderIndex + "y tiene carts: " + order.content.size());
         datasource.get(orderIndex).content = order.content;
     }
 
@@ -75,12 +80,12 @@ public class OrderListModel implements OrderListContract.Model {
     public void onResetDatastore() {
         Log.e(TAG, "onResetDatastore()");
 
-        ProductStore.reinstance(); // for testing
+        ProductStore.reinstance(); // for testin
+        ProductRepository.reinstance();
     }
 
     @Override
     public void onNewDataAdded() {
         //TODO: falta implementacion
-
     }
 }
