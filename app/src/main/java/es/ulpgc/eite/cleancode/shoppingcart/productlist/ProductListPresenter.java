@@ -5,6 +5,7 @@ import android.util.Log;
 import java.lang.ref.WeakReference;
 
 import es.ulpgc.eite.cleancode.shoppingcart.app.OrderToProductListState;
+import es.ulpgc.eite.cleancode.shoppingcart.app.ProductListToDetailState;
 import es.ulpgc.eite.cleancode.shoppingcart.data.ProductData;
 
 public class ProductListPresenter implements ProductListContract.Presenter {
@@ -75,7 +76,10 @@ public class ProductListPresenter implements ProductListContract.Presenter {
     @Override
     public void onListTapped(ProductData data) {
         Log.e(TAG, "onListTapped()");
-
+        ProductListToDetailState passedState = new ProductListToDetailState();
+        passedState.product = data;
+        router.passStateToNextScreen(passedState);
+        view.get().navigateToNextScreen();
         //TODO: falta implementacion
     }
 
