@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Shopping Cart</string>
+
+    <string name="product_list_title">Product List</string>
+    <string name="product_detail_title">Product Detail</string>
+    <string name="order_list_title">Order List</string>
+    <string name="order_detail_title">Order Detail</string>
+</resources>
