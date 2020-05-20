@@ -26,6 +26,18 @@ public class OrderListModel implements OrderListContract.Model {
     public void addOrder() {
         OrderData order = new OrderData(String.valueOf(currentOrder++));
         datasource.add(order);
+        data = order;
+    }
+
+
+    @Override
+    public int getCurrentOrder() {
+        return currentOrder;
+    }
+
+    @Override
+    public void setCurrentOrder(int currentOrder) {
+        this.currentOrder = currentOrder;
     }
 
     @Override

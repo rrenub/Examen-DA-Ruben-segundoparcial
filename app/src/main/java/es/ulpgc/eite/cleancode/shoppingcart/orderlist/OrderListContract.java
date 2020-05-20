@@ -55,6 +55,10 @@ public interface OrderListContract {
     void onResetDatastore();
 
       void addOrder();
+
+    int getCurrentOrder();
+
+    void setCurrentOrder(int currentOrder);
   }
 
   interface Router {

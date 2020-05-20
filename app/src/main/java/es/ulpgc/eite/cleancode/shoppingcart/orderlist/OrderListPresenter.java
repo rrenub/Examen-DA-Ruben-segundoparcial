@@ -37,7 +37,7 @@ public class OrderListPresenter implements OrderListContract.Presenter {
         Log.e(TAG, "onRestart()");
 
         model.onRestartScreen(state.datasource);
-
+        model.setCurrentOrder(state.currentOrder);
         //TODO: falta implementacion
     }
 
@@ -47,6 +47,7 @@ public class OrderListPresenter implements OrderListContract.Presenter {
 
         //TODO: falta implementacion
         state.datasource = model.getStoredOrderList();
+        state.currentOrder = model.getCurrentOrder();
         view.get().onDataUpdated(state);
 
     }
@@ -73,6 +74,7 @@ public class OrderListPresenter implements OrderListContract.Presenter {
         Log.e(TAG, "onButtonTapped()");
         model.addOrder();
         state.datasource = model.getStoredOrderList();
+        state.currentOrder = model.getCurrentOrder();
         view.get().onDataUpdated(state);
     }
 
