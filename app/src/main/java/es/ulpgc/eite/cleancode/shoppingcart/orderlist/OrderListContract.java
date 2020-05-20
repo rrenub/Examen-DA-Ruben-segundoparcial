@@ -42,7 +42,7 @@ public interface OrderListContract {
   }
 
   interface Model {
-    List<OrderData> getStoredDatasource();
+    List<OrderData> getStoredOrderList();
     OrderData getStoredNewData();
 
 
@@ -53,6 +53,8 @@ public interface OrderListContract {
     void onDataFromNextScreen(OrderData data);
 
     void onResetDatastore();
+
+      void addOrder();
   }
 
   interface Router {

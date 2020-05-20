@@ -8,88 +8,90 @@ import es.ulpgc.eite.cleancode.shoppingcart.data.OrderData;
 
 public class OrderListPresenter implements OrderListContract.Presenter {
 
-  public static String TAG = OrderListPresenter.class.getSimpleName();
+    public static String TAG = OrderListPresenter.class.getSimpleName();
 
-  private WeakReference<OrderListContract.View> view;
-  private OrderListState state;
-  private OrderListContract.Model model;
-  private OrderListContract.Router router;
+    private WeakReference<OrderListContract.View> view;
+    private OrderListState state;
+    private OrderListContract.Model model;
+    private OrderListContract.Router router;
 
-  public OrderListPresenter(OrderListState state) {
-    this.state = state;
-  }
-
-  @Override
-  public void onStart() {
-    Log.e(TAG, "onStart()");
-
-    if (state == null) {
-      state = new OrderListState();
+    public OrderListPresenter(OrderListState state) {
+        this.state = state;
     }
 
-    model.onResetDatastore(); // for testing
+    @Override
+    public void onStart() {
+        Log.e(TAG, "onStart()");
 
-    //TODO: falta implementacion
-  }
+        if (state == null) {
+            state = new OrderListState();
+        }
 
-  @Override
-  public void onRestart() {
-    Log.e(TAG, "onRestart()");
+        model.onResetDatastore(); // for testing
 
-    //TODO: falta implementacion
-  }
+        //TODO: falta implementacion
+    }
 
-  @Override
-  public void onResume() {
-    Log.e(TAG, "onResume()");
+    @Override
+    public void onRestart() {
+        Log.e(TAG, "onRestart()");
 
-    //TODO: falta implementacion
+        //TODO: falta implementacion
+    }
 
-  }
+    @Override
+    public void onResume() {
+        Log.e(TAG, "onResume()");
 
-  @Override
-  public void onBackPressed() {
-    Log.e(TAG, "onBackPressed()");
+        //TODO: falta implementacion
 
-    //TODO: falta implementacion
-  }
+    }
 
-  @Override
-  public void onPause() {
-    Log.e(TAG, "onPause()");
-  }
+    @Override
+    public void onBackPressed() {
+        Log.e(TAG, "onBackPressed()");
 
-  @Override
-  public void onDestroy() {
-    Log.e(TAG, "onDestroy()");
-  }
+        //TODO: falta implementacion
+    }
 
-  @Override
-  public void onButtonTapped() {
-    Log.e(TAG, "onButtonTapped()");
+    @Override
+    public void onPause() {
+        Log.e(TAG, "onPause()");
+    }
 
-    //TODO: falta implementacion
-  }
+    @Override
+    public void onDestroy() {
+        Log.e(TAG, "onDestroy()");
+    }
 
-  @Override
-  public void onListTapped(OrderData data) {
-    Log.e(TAG, "onListTapped()");
+    @Override
+    public void onButtonTapped() {
+        Log.e(TAG, "onButtonTapped()");
+        model.addOrder();
+        state.datasource = model.getStoredOrderList();
+        view.get().onDataUpdated(state);
 
-    //TODO: falta implementacion
-  }
+    }
 
-  @Override
-  public void injectView(WeakReference<OrderListContract.View> view) {
-    this.view = view;
-  }
+    @Override
+    public void onListTapped(OrderData data) {
+        Log.e(TAG, "onListTapped()");
 
-  @Override
-  public void injectModel(OrderListContract.Model model) {
-    this.model = model;
-  }
+        //TODO: falta implementacion
+    }
 
-  @Override
-  public void injectRouter(OrderListContract.Router router) {
-    this.router = router;
-  }
+    @Override
+    public void injectView(WeakReference<OrderListContract.View> view) {
+        this.view = view;
+    }
+
+    @Override
+    public void injectModel(OrderListContract.Model model) {
+        this.model = model;
+    }
+
+    @Override
+    public void injectRouter(OrderListContract.Router router) {
+        this.router = router;
+    }
 }
