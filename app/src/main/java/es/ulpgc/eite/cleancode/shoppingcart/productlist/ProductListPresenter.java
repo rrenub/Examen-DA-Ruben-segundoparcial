@@ -48,6 +48,8 @@ public class ProductListPresenter implements ProductListContract.Presenter {
             Log.d(TAG, "Es el pedido: " + savedState.orderData.label);
         }
 
+        state.datasource = model.getStoredDatasource();
+        view.get().onDataUpdated(state);
         //TODO: falta implementacion
 
     }
