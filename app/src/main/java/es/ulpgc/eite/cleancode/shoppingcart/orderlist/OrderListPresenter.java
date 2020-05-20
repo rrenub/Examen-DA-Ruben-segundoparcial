@@ -36,6 +36,8 @@ public class OrderListPresenter implements OrderListContract.Presenter {
     public void onRestart() {
         Log.e(TAG, "onRestart()");
 
+        model.onRestartScreen(state.datasource);
+
         //TODO: falta implementacion
     }
 
@@ -44,6 +46,8 @@ public class OrderListPresenter implements OrderListContract.Presenter {
         Log.e(TAG, "onResume()");
 
         //TODO: falta implementacion
+        state.datasource = model.getStoredOrderList();
+        view.get().onDataUpdated(state);
 
     }
 
@@ -70,7 +74,6 @@ public class OrderListPresenter implements OrderListContract.Presenter {
         model.addOrder();
         state.datasource = model.getStoredOrderList();
         view.get().onDataUpdated(state);
-
     }
 
     @Override
