@@ -67,7 +67,7 @@ public class AppMediator  {
 
     public OrderToProductListState getOrderToProductListState() {
         OrderToProductListState temp = orderToProductListState;
-        orderToProductListState = null;
+        //orderToProductListState = null;
         return temp;
     }
 
@@ -77,13 +77,13 @@ public class AppMediator  {
 
     public ProductListToDetailState getProductListToDetailState() {
         ProductListToDetailState temp = productListToDetailState;
-        productListToDetailState = null;
+        //productListToDetailState = null;
         return temp;
     }
 
     public ProductDetailToListState getProductDetailToListState() {
         ProductDetailToListState temp = productDetailToListState;
-        productDetailState = null;
+        //productDetailState = null;
         return temp;
     }
 
@@ -93,7 +93,7 @@ public class AppMediator  {
 
     public ProductToOrderListState getProductToOrderListState() {
         ProductToOrderListState temp = productToOrderListState;
-        productToOrderListState = null;
+        //productToOrderListState = null;
         return temp;
     }
 
@@ -103,7 +103,7 @@ public class AppMediator  {
 
     public OrderListToDetailState getOrderListToDetailState() {
         OrderListToDetailState temp = orderListToDetailState;
-        orderListToDetailState = null;
+        //orderListToDetailState = null;
         return temp;
     }
 
