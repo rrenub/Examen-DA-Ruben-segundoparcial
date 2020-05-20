@@ -16,8 +16,7 @@ public class OrderDetailRouter implements OrderDetailContract.Router {
 
   @Override
   public OrderListToDetailState getStateFromPreviousScreen() {
-    //TODO: falta implementacion
-    return null;
+    return mediator.getOrderListToDetailState();
   }
 
 }

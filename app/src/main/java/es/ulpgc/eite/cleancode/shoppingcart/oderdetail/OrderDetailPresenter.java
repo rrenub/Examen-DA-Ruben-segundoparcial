@@ -4,83 +4,89 @@ import android.util.Log;
 
 import java.lang.ref.WeakReference;
 
+import es.ulpgc.eite.cleancode.shoppingcart.app.OrderListToDetailState;
 import es.ulpgc.eite.cleancode.shoppingcart.data.ProductData;
 
 public class OrderDetailPresenter implements OrderDetailContract.Presenter {
 
-  public static String TAG = OrderDetailPresenter.class.getSimpleName();
+    public static String TAG = OrderDetailPresenter.class.getSimpleName();
 
-  private WeakReference<OrderDetailContract.View> view;
-  private OrderDetailState state;
-  private OrderDetailContract.Model model;
-  private OrderDetailContract.Router router;
+    private WeakReference<OrderDetailContract.View> view;
+    private OrderDetailState state;
+    private OrderDetailContract.Model model;
+    private OrderDetailContract.Router router;
 
-  public OrderDetailPresenter(OrderDetailState state) {
-    this.state = state;
-  }
-
-  @Override
-  public void onStart() {
-    Log.e(TAG, "onStart()");
-
-    if (state == null) {
-      state = new OrderDetailState();
+    public OrderDetailPresenter(OrderDetailState state) {
+        this.state = state;
     }
 
-    //TODO: falta implementacion
-  }
+    @Override
+    public void onStart() {
+        Log.e(TAG, "onStart()");
 
-  @Override
-  public void onRestart() {
-    Log.e(TAG, "onRestart()");
+        if (state == null) {
+            state = new OrderDetailState();
+        }
 
-    //TODO: falta implementacion
-  }
+        //TODO: falta implementacion
+    }
 
-  @Override
-  public void onResume() {
-    Log.e(TAG, "onResume()");
+    @Override
+    public void onRestart() {
+        Log.e(TAG, "onRestart()");
 
-    //TODO: falta implementacion
+        //TODO: falta implementacion
+    }
 
-  }
+    @Override
+    public void onResume() {
+        Log.e(TAG, "onResume()");
 
-  @Override
-  public void onBackPressed() {
-    Log.e(TAG, "onBackPressed()");
+        OrderListToDetailState savedState = router.getStateFromPreviousScreen();
+        if(savedState != null) {
+            model.onDataFromPreviousScreen(savedState.orderData);
+        }
 
-    //TODO: falta implementacion
-  }
+        state.data = savedState.orderData;
+        view.get().onDataUpdated(state);
+    }
 
-  @Override
-  public void onPause() {
-    Log.e(TAG, "onPause()");
-  }
+    @Override
+    public void onBackPressed() {
+        Log.e(TAG, "onBackPressed()");
 
-  @Override
-  public void onDestroy() {
-    Log.e(TAG, "onDestroy()");
-  }
+        //TODO: falta implementacion
+    }
 
-  @Override
-  public void onListTapped(ProductData data) {
-    Log.e(TAG, "onListTapped()");
+    @Override
+    public void onPause() {
+        Log.e(TAG, "onPause()");
+    }
 
-    //TODO: falta implementacion
-  }
+    @Override
+    public void onDestroy() {
+        Log.e(TAG, "onDestroy()");
+    }
 
-  @Override
-  public void injectView(WeakReference<OrderDetailContract.View> view) {
-    this.view = view;
-  }
+    @Override
+    public void onListTapped(ProductData data) {
+        Log.e(TAG, "onListTapped()");
 
-  @Override
-  public void injectModel(OrderDetailContract.Model model) {
-    this.model = model;
-  }
+        //TODO: falta implementacion
+    }
 
-  @Override
-  public void injectRouter(OrderDetailContract.Router router) {
-    this.router = router;
-  }
+    @Override
+    public void injectView(WeakReference<OrderDetailContract.View> view) {
+        this.view = view;
+    }
+
+    @Override
+    public void injectModel(OrderDetailContract.Model model) {
+        this.model = model;
+    }
+
+    @Override
+    public void injectRouter(OrderDetailContract.Router router) {
+        this.router = router;
+    }
 }

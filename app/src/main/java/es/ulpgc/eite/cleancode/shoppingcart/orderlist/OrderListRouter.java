@@ -27,7 +27,7 @@ public class OrderListRouter implements OrderListContract.Router {
 
   @Override
   public void passStateToDetailScreen(OrderListToDetailState state) {
-    //TODO: falta implementacion
+    mediator.setOrderListToDetailState(state);
   }
 
 }
