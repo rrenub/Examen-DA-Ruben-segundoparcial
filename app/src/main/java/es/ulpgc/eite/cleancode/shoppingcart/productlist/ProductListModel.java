@@ -58,7 +58,8 @@ public class ProductListModel implements ProductListContract.Model {
     public void onRestartScreen(List<ProductData> datasource, OrderData data) {
         // Log.e(TAG, "onRestartScreen()");
 
-        //TODO: falta implementacion
+        this.datasource = datasource;
+        this.data = data;
     }
 
 

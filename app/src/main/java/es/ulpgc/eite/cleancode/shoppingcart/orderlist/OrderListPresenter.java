@@ -53,6 +53,8 @@ public class OrderListPresenter implements OrderListContract.Presenter {
         ProductToOrderListState savedState = router.getStateFromNextScreen();
         if(savedState != null) {
             model.updateOrder(savedState.order);
+            Log.d(TAG, "El order es: " + savedState.order.content.size() +
+                                " y el primero es " + savedState.order.content.get(0).label + " que tiene " + savedState.order.content.get(0).value);
         }
 
         state.datasource = model.getStoredOrderList();
