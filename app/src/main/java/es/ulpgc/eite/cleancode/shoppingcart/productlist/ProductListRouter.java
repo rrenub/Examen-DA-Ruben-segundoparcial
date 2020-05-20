@@ -28,7 +28,7 @@ public class ProductListRouter implements ProductListContract.Router {
 
     @Override
     public void passStateToPreviousScreen(ProductToOrderListState state) {
-        //TODO: falta implementacion
+        mediator.setProductToOrderListState(state);
     }
 
     @Override

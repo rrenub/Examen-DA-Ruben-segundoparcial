@@ -7,6 +7,7 @@ import java.lang.ref.WeakReference;
 import es.ulpgc.eite.cleancode.shoppingcart.app.OrderToProductListState;
 import es.ulpgc.eite.cleancode.shoppingcart.app.ProductDetailToListState;
 import es.ulpgc.eite.cleancode.shoppingcart.app.ProductListToDetailState;
+import es.ulpgc.eite.cleancode.shoppingcart.app.ProductToOrderListState;
 import es.ulpgc.eite.cleancode.shoppingcart.data.ProductData;
 
 public class ProductListPresenter implements ProductListContract.Presenter {
@@ -57,6 +58,7 @@ public class ProductListPresenter implements ProductListContract.Presenter {
             model.updateProductList(savedState.product);
             if(savedState.cartsAdded > 0) {
                 model.addProductToOrder(savedState.cartsAdded, savedState.product);
+                Log.d(TAG, "El cart es: " + savedState.cartsAdded);
             }
         }
 
@@ -70,6 +72,10 @@ public class ProductListPresenter implements ProductListContract.Presenter {
     public void onBackPressed() {
         Log.e(TAG, "onBackPressed()");
 
+        ProductToOrderListState passedState = new ProductToOrderListState();
+        passedState.order = model.getStoredData();
+        router.passStateToPreviousScreen(passedState);
+        view.get().finishActivity();
         //TODO: falta implementacion
     }
 

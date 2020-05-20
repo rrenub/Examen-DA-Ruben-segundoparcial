@@ -17,6 +17,7 @@ public class AppMediator  {
     private OrderToProductListState orderToProductListState;
     private ProductListToDetailState productListToDetailState;
     private ProductDetailToListState productDetailToListState;
+    private ProductToOrderListState productToOrderListState;
 
     private AppMediator() {
         orderListState= new OrderListState();
@@ -87,5 +88,15 @@ public class AppMediator  {
 
     public void setProductDetailToListState(ProductDetailToListState productDetailToListState) {
         this.productDetailToListState = productDetailToListState;
+    }
+
+    public ProductToOrderListState getProductToOrderListState() {
+        ProductToOrderListState temp = productToOrderListState;
+        productToOrderListState = null;
+        return temp;
+    }
+
+    public void setProductToOrderListState(ProductToOrderListState productToOrderListState) {
+        this.productToOrderListState = productToOrderListState;
     }
 }

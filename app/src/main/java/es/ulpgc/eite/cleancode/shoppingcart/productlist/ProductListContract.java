@@ -17,6 +17,8 @@ public interface ProductListContract {
     void navigateToNextScreen();
 
     void onDataUpdated(ProductListViewModel viewModel);
+
+    void finishActivity();
   }
 
   interface Presenter {

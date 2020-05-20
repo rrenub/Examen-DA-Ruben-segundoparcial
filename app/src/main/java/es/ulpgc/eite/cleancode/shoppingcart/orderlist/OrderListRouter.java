@@ -17,8 +17,7 @@ public class OrderListRouter implements OrderListContract.Router {
 
   @Override
   public ProductToOrderListState getStateFromNextScreen() {
-    //TODO: falta implementacion
-    return null;
+    return mediator.getProductToOrderListState();
   }
 
   @Override

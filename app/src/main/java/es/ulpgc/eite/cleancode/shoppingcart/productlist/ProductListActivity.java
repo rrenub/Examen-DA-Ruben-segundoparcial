@@ -14,91 +14,96 @@ import es.ulpgc.eite.cleancode.shoppingcart.data.ProductData;
 import es.ulpgc.eite.cleancode.shoppingcart.productdetail.ProductDetailActivity;
 
 public class ProductListActivity
-    extends AppCompatActivity implements ProductListContract.View {
+        extends AppCompatActivity implements ProductListContract.View {
 
-  public static String TAG = ProductListActivity.class.getSimpleName();
+    public static String TAG = ProductListActivity.class.getSimpleName();
 
-  private ProductListContract.Presenter presenter;
+    private ProductListContract.Presenter presenter;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_product_list);
-    getSupportActionBar().setTitle(R.string.product_list_title);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_product_list);
+        getSupportActionBar().setTitle(R.string.product_list_title);
 
-    // do the setup
-    ProductListScreen.configure(this);
+        // do the setup
+        ProductListScreen.configure(this);
 
-    if (savedInstanceState == null) {
-      presenter.onStart();
+        if (savedInstanceState == null) {
+            presenter.onStart();
 
-    } else {
-      presenter.onRestart();
+        } else {
+            presenter.onRestart();
+        }
     }
-  }
 
-  @Override
-  protected void onResume() {
-    super.onResume();
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-    // load the data
-    presenter.onResume();
-  }
+        // load the data
+        presenter.onResume();
+    }
 
-  @Override
-  public void onBackPressed() {
-    super.onBackPressed();
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
 
-    presenter.onBackPressed();
-  }
+        presenter.onBackPressed();
+    }
 
-  @Override
-  protected void onPause() {
-    super.onPause();
+    @Override
+    protected void onPause() {
+        super.onPause();
 
-    presenter.onPause();
-  }
+        presenter.onPause();
+    }
 
-  @Override
-  protected void onDestroy() {
-    super.onDestroy();
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
-    presenter.onDestroy();
-  }
+        presenter.onDestroy();
+    }
 
-  @Override
-  public void onDataUpdated(ProductListViewModel viewModel) {
-    //Log.e(TAG, "onDataUpdated()");
+    @Override
+    public void finishActivity() {
+        finish();
+    }
 
-    viewModel.datasource.sort(new Comparator<ProductData>() {
+    @Override
+    public void onDataUpdated(ProductListViewModel viewModel) {
+        //Log.e(TAG, "onDataUpdated()");
 
-      @Override
-      public int compare(ProductData d1, ProductData d2) {
-        return d1.label.compareTo(d2.label);
-      }
-    });
+        viewModel.datasource.sort(new Comparator<ProductData>() {
 
-    // deal with the datasource
-    ((ListView) findViewById(R.id.productList)).setAdapter(new ProductListAdapter(
-            this, viewModel.datasource, new View.OnClickListener() {
+            @Override
+            public int compare(ProductData d1, ProductData d2) {
+                return d1.label.compareTo(d2.label);
+            }
+        });
 
-          @Override
-          public void onClick(View view) {
-            ProductData data = (ProductData) view.getTag();
-            presenter.onListTapped(data);
-          }
-        })
-    );
-  }
+        // deal with the datasource
+        ((ListView) findViewById(R.id.productList)).setAdapter(new ProductListAdapter(
+                        this, viewModel.datasource, new View.OnClickListener() {
 
-  @Override
-  public void navigateToNextScreen() {
-    Intent intent = new Intent(this, ProductDetailActivity.class);
-    startActivity(intent);
-  }
+                    @Override
+                    public void onClick(View view) {
+                        ProductData data = (ProductData) view.getTag();
+                        presenter.onListTapped(data);
+                    }
+                })
+        );
+    }
 
-  @Override
-  public void injectPresenter(ProductListContract.Presenter presenter) {
-    this.presenter = presenter;
-  }
+    @Override
+    public void navigateToNextScreen() {
+        Intent intent = new Intent(this, ProductDetailActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void injectPresenter(ProductListContract.Presenter presenter) {
+        this.presenter = presenter;
+    }
 }

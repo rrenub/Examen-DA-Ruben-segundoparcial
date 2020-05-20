@@ -29,6 +29,12 @@ public class OrderListModel implements OrderListContract.Model {
         data = order;
     }
 
+    @Override
+    public void updateOrder(OrderData order) {
+        int orderIndex = datasource.indexOf(order);
+        Log.d(TAG, "El index es: " + orderIndex);
+        datasource.get(orderIndex).content = order.content;
+    }
 
     @Override
     public int getCurrentOrder() {

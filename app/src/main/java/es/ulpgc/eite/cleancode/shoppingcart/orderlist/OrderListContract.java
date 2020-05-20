@@ -59,6 +59,10 @@ public interface OrderListContract {
     int getCurrentOrder();
 
     void setCurrentOrder(int currentOrder);
+
+    void updateOrder(OrderData order);
+
+    //void addOrder(OrderData order);
   }
 
   interface Router {
