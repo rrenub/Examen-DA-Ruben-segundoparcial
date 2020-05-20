@@ -44,8 +44,11 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
         ProductListToDetailState savedState = router.getStateFromPreviousScreen();
         if(savedState != null) {
             Log.d(TAG, "El producto escogido es: " + savedState.product.label);
+            model.onDataFromPreviousScreen(savedState.product);
         }
 
+        state.data = model.getStoredData();
+        view.get().onDataUpdated(state);
         //TODO: falta implementacion
 
     }
@@ -70,7 +73,9 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
     @Override
     public void onProductButtonTapped() {
         Log.e(TAG, "onProductButtonTapped()");
-
+        model.addProductToCart();
+        state.data = model.getStoredData();
+        view.get().onDataUpdated(state);
         //TODO: falta implementacion
     }
 

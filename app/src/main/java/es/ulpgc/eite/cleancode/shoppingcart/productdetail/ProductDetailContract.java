@@ -44,6 +44,8 @@ public interface ProductDetailContract {
     void onDataFromPreviousScreen(ProductData data);
 
     void onDataUpdated();
+
+      void addProductToCart();
   }
 
   interface Router {

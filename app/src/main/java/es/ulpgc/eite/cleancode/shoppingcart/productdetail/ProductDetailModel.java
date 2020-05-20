@@ -4,34 +4,42 @@ import es.ulpgc.eite.cleancode.shoppingcart.data.ProductData;
 
 public class ProductDetailModel implements ProductDetailContract.Model {
 
-  public static String TAG = ProductDetailModel.class.getSimpleName();
+    public static String TAG = ProductDetailModel.class.getSimpleName();
 
-  private ProductData data;
+    private ProductData data;
 
 
-  @Override
-  public ProductData getStoredData() {
-    // Log.e(TAG, "getStoredDatasource()");
-    return data;
-  }
+    @Override
+    public ProductData getStoredData() {
+        // Log.e(TAG, "getStoredDatasource()");
+        return data;
+    }
 
-  @Override
-  public void onRestartScreen(ProductData data) {
-    // Log.e(TAG, "onRestartScreen()");
+    @Override
+    public void addProductToCart() {
+        if(data.content > 0) {
+            data.content--;
+            data.value++;
+        }
+    }
 
-    this.data=data;
-  }
+    @Override
+    public void onRestartScreen(ProductData data) {
+        // Log.e(TAG, "onRestartScreen()");
 
-  @Override
-  public void onDataFromPreviousScreen(ProductData data) {
-    // Log.e(TAG, "onDataFromPreviousScreen()");
+        this.data=data;
+    }
 
-    this.data=data;
-  }
+    @Override
+    public void onDataFromPreviousScreen(ProductData data) {
+        // Log.e(TAG, "onDataFromPreviousScreen()");
 
-  @Override
-  public void onDataUpdated() {
-    //TODO: falta implementacion
-  }
+        this.data=data;
+    }
+
+    @Override
+    public void onDataUpdated() {
+        //TODO: falta implementacion
+    }
 
 }
