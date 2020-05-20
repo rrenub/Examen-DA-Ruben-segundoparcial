@@ -7,52 +7,63 @@ import es.ulpgc.eite.cleancode.shoppingcart.productlist.ProductListState;
 
 public class AppMediator  {
 
-  private static AppMediator instance;
+    private static AppMediator instance;
 
-  private OrderListState orderListState;
-  private ProductDetailState productDetailState;
-  private ProductListState productListState;
-  private OrderDetailState orderDetailState;
+    private OrderListState orderListState;
+    private ProductDetailState productDetailState;
+    private ProductListState productListState;
+    private OrderDetailState orderDetailState;
 
-  private AppMediator() {
-    orderListState= new OrderListState();
-    productDetailState= new ProductDetailState();
-    productListState= new ProductListState();
-    orderDetailState= new OrderDetailState();
-  }
+    private OrderToProductListState orderToProductListState;
 
-  public static void resetInstance() {
-    AppMediator.instance = null;
-  }
-
-  public static AppMediator getInstance() {
-    if(instance==null) {
-      instance = new AppMediator();
+    private AppMediator() {
+        orderListState= new OrderListState();
+        productDetailState= new ProductDetailState();
+        productListState= new ProductListState();
+        orderDetailState= new OrderDetailState();
     }
 
-    return instance;
-  }
+    public static void resetInstance() {
+        AppMediator.instance = null;
+    }
+
+    public static AppMediator getInstance() {
+        if(instance==null) {
+            instance = new AppMediator();
+        }
+
+        return instance;
+    }
 
 
-  public void setProductListState(ProductListState state) {
-    this.productListState = state;
-  }
+    public void setProductListState(ProductListState state) {
+        this.productListState = state;
+    }
 
-  public OrderListState getOrderListState() {
-    return orderListState;
-  }
+    public OrderListState getOrderListState() {
+        return orderListState;
+    }
 
-  public OrderDetailState getOrderDetailState() {
-    return orderDetailState;
-  }
+    public OrderDetailState getOrderDetailState() {
+        return orderDetailState;
+    }
 
-  public ProductDetailState getProductDetailState() {
-    return productDetailState;
-  }
+    public ProductDetailState getProductDetailState() {
+        return productDetailState;
+    }
 
-  public ProductListState getProductListState() {
-    return productListState;
-  }
+    public ProductListState getProductListState() {
+        return productListState;
+    }
 
 
+    public void setOrderToProductListState(OrderToProductListState state) {
+        orderToProductListState = state;
+    }
+
+    public OrderToProductListState getOrderToProductListState() {
+        OrderToProductListState temp = orderToProductListState;
+        orderToProductListState = null;
+        return temp;
+    }
 }

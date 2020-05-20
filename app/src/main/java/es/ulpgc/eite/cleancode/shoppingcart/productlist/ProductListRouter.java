@@ -8,36 +8,34 @@ import es.ulpgc.eite.cleancode.shoppingcart.app.ProductToOrderListState;
 
 public class ProductListRouter implements ProductListContract.Router {
 
-  public static String TAG = ProductListRouter.class.getSimpleName();
+    public static String TAG = ProductListRouter.class.getSimpleName();
 
-  private AppMediator mediator;
+    private AppMediator mediator;
 
-  public ProductListRouter(AppMediator mediator) {
-    this.mediator = mediator;
-  }
+    public ProductListRouter(AppMediator mediator) {
+        this.mediator = mediator;
+    }
 
-  @Override
-  public ProductDetailToListState getStateFromNextScreen() {
-    //TODO: falta implementacion
+    @Override
+    public ProductDetailToListState getStateFromNextScreen() {
+        //TODO: falta implementacion
 
-    return null;
-  }
+        return null;
+    }
 
-  @Override
-  public void passStateToNextScreen(ProductListToDetailState state) {
-    //TODO: falta implementacion
-  }
+    @Override
+    public void passStateToNextScreen(ProductListToDetailState state) {
+        //TODO: falta implementacion
+    }
 
-  @Override
-  public void passStateToPreviousScreen(ProductToOrderListState state) {
-    //TODO: falta implementacion
-  }
+    @Override
+    public void passStateToPreviousScreen(ProductToOrderListState state) {
+        //TODO: falta implementacion
+    }
 
-  @Override
-  public OrderToProductListState getStateFromPreviousScreen() {
-    //TODO: falta implementacion
-
-    return null;
-  }
+    @Override
+    public OrderToProductListState getStateFromPreviousScreen() {
+        return mediator.getOrderToProductListState();
+    }
 
 }

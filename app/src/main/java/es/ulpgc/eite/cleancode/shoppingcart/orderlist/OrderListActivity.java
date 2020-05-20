@@ -16,107 +16,107 @@ import es.ulpgc.eite.cleancode.shoppingcart.oderdetail.OrderDetailActivity;
 import es.ulpgc.eite.cleancode.shoppingcart.productlist.ProductListActivity;
 
 public class OrderListActivity
-    extends AppCompatActivity implements OrderListContract.View {
+        extends AppCompatActivity implements OrderListContract.View {
 
-  public static String TAG = OrderListActivity.class.getSimpleName();
+    public static String TAG = OrderListActivity.class.getSimpleName();
 
-  private OrderListContract.Presenter presenter;
+    private OrderListContract.Presenter presenter;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_order_list);
-    getSupportActionBar().setTitle(R.string.order_list_title);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_order_list);
+        getSupportActionBar().setTitle(R.string.order_list_title);
 
-    if (savedInstanceState == null) {
-      AppMediator.resetInstance();
+        if (savedInstanceState == null) {
+            AppMediator.resetInstance();
+        }
+
+        // do the setup
+        OrderListScreen.configure(this);
+
+        if (savedInstanceState == null) {
+            presenter.onStart();
+
+        } else {
+            presenter.onRestart();
+        }
     }
 
-    // do the setup
-    OrderListScreen.configure(this);
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-    if (savedInstanceState == null) {
-      presenter.onStart();
-
-    } else {
-      presenter.onRestart();
+        // load the data (Commit de prueba)
+        presenter.onResume();
     }
-  }
 
-  @Override
-  protected void onResume() {
-    super.onResume();
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
 
-    // load the data (Commit de prueba)
-    presenter.onResume();
-  }
+        presenter.onBackPressed();
+    }
 
-  @Override
-  public void onBackPressed() {
-    super.onBackPressed();
+    @Override
+    protected void onPause() {
+        super.onPause();
 
-    presenter.onBackPressed();
-  }
+        presenter.onPause();
+    }
 
-  @Override
-  protected void onPause() {
-    super.onPause();
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
-    presenter.onPause();
-  }
-
-  @Override
-  protected void onDestroy() {
-    super.onDestroy();
-
-    presenter.onDestroy();
-  }
+        presenter.onDestroy();
+    }
 
 
-  public void onOrderButtonTapped(View view) {
-    presenter.onButtonTapped();
-  }
+    public void onOrderButtonTapped(View view) {
+        presenter.onButtonTapped();
+    }
 
-  @Override
-  public void onDataUpdated(OrderListViewModel viewModel) {
-    //Log.e(TAG, "onDataUpdated()");
+    @Override
+    public void onDataUpdated(OrderListViewModel viewModel) {
+        //Log.e(TAG, "onDataUpdated()");
 
-    viewModel.datasource.sort(new Comparator<OrderData>() {
+        viewModel.datasource.sort(new Comparator<OrderData>() {
 
-      @Override
-      public int compare(OrderData d1, OrderData d2) {
-        return d1.label.compareTo(d2.label);
-      }
-    });
+            @Override
+            public int compare(OrderData d1, OrderData d2) {
+                return d1.label.compareTo(d2.label);
+            }
+        });
 
-    // deal with the datasource
-    ((ListView) findViewById(R.id.orderList)).setAdapter(new OrderListAdapter(
-            this, viewModel.datasource, new View.OnClickListener() {
+        // deal with the datasource
+        ((ListView) findViewById(R.id.orderList)).setAdapter(new OrderListAdapter(
+                        this, viewModel.datasource, new View.OnClickListener() {
 
-          @Override
-          public void onClick(View view) {
-            OrderData data = (OrderData) view.getTag();
-            presenter.onListTapped(data);
-          }
-        })
-    );
-  }
+                    @Override
+                    public void onClick(View view) {
+                        OrderData data = (OrderData) view.getTag();
+                        presenter.onListTapped(data);
+                    }
+                })
+        );
+    }
 
-  @Override
-  public void navigateToNextScreen() {
-    Intent intent = new Intent(this, ProductListActivity.class);
-    startActivity(intent);
-  }
+    @Override
+    public void navigateToNextScreen() {
+        Intent intent = new Intent(this, ProductListActivity.class);
+        startActivity(intent);
+    }
 
-  @Override
-  public void navigateToDetailScreen() {
-    Intent intent = new Intent(this, OrderDetailActivity.class);
-    startActivity(intent);
-  }
+    @Override
+    public void navigateToDetailScreen() {
+        Intent intent = new Intent(this, OrderDetailActivity.class);
+        startActivity(intent);
+    }
 
-  @Override
-  public void injectPresenter(OrderListContract.Presenter presenter) {
-    this.presenter = presenter;
-  }
+    @Override
+    public void injectPresenter(OrderListContract.Presenter presenter) {
+        this.presenter = presenter;
+    }
 
 }

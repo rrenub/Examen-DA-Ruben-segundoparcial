@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.lang.ref.WeakReference;
 
+import es.ulpgc.eite.cleancode.shoppingcart.app.OrderToProductListState;
 import es.ulpgc.eite.cleancode.shoppingcart.data.OrderData;
 
 public class OrderListPresenter implements OrderListContract.Presenter {
@@ -38,14 +39,11 @@ public class OrderListPresenter implements OrderListContract.Presenter {
 
         model.onRestartScreen(state.datasource);
         model.setCurrentOrder(state.currentOrder);
-        //TODO: falta implementacion
     }
 
     @Override
     public void onResume() {
         Log.e(TAG, "onResume()");
-
-        //TODO: falta implementacion
         state.datasource = model.getStoredOrderList();
         state.currentOrder = model.getCurrentOrder();
         view.get().onDataUpdated(state);
@@ -56,7 +54,6 @@ public class OrderListPresenter implements OrderListContract.Presenter {
     public void onBackPressed() {
         Log.e(TAG, "onBackPressed()");
 
-        //TODO: falta implementacion
     }
 
     @Override
@@ -75,8 +72,13 @@ public class OrderListPresenter implements OrderListContract.Presenter {
         model.addOrder();
         state.datasource = model.getStoredOrderList();
         state.currentOrder = model.getCurrentOrder();
-        view.get().onDataUpdated(state);
+
+        OrderToProductListState passedState = new OrderToProductListState();
+        passedState.orderData = model.getStoredNewData();
+        router.passStateToNextScreen(passedState);
+        view.get().navigateToNextScreen();
     }
+
 
     @Override
     public void onListTapped(OrderData data) {
