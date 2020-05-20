@@ -53,6 +53,9 @@ public interface ProductListContract {
 
     void onRestartScreen(List<ProductData> datasource, OrderData data);
 
+      void updateProductList(ProductData product);
+
+    void addProductToOrder(int cartsAdded, ProductData product);
   }
 
   interface Router {

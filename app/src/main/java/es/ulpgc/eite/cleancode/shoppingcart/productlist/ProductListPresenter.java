@@ -5,6 +5,7 @@ import android.util.Log;
 import java.lang.ref.WeakReference;
 
 import es.ulpgc.eite.cleancode.shoppingcart.app.OrderToProductListState;
+import es.ulpgc.eite.cleancode.shoppingcart.app.ProductDetailToListState;
 import es.ulpgc.eite.cleancode.shoppingcart.app.ProductListToDetailState;
 import es.ulpgc.eite.cleancode.shoppingcart.data.ProductData;
 
@@ -29,6 +30,12 @@ public class ProductListPresenter implements ProductListContract.Presenter {
             state = new ProductListState();
         }
 
+        OrderToProductListState savedState = router.getStateFromPreviousScreen();
+        if(savedState != null) {
+            Log.d(TAG, "Es el pedido: " + savedState.orderData.label);
+            model.onDataFromPreviousScreen(savedState.orderData);
+        }
+
         //TODO: falta implementacion
 
     }
@@ -44,9 +51,13 @@ public class ProductListPresenter implements ProductListContract.Presenter {
     public void onResume() {
         Log.e(TAG, "onResume()");
 
-        OrderToProductListState savedState = router.getStateFromPreviousScreen();
+        ProductDetailToListState savedState = router.getStateFromNextScreen();
         if(savedState != null) {
-            Log.d(TAG, "Es el pedido: " + savedState.orderData.label);
+            Log.d(TAG, "Es el producto " + savedState.product.label);
+            model.updateProductList(savedState.product);
+            if(savedState.cartsAdded > 0) {
+                model.addProductToOrder(savedState.cartsAdded, savedState.product);
+            }
         }
 
         state.datasource = model.getStoredDatasource();

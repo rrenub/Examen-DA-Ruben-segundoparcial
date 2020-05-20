@@ -12,6 +12,8 @@ public interface ProductDetailContract {
     void injectPresenter(Presenter presenter);
 
     void onDataUpdated(ProductDetailViewModel viewModel);
+
+    void navigateToPreviousScreen();
   }
 
   interface Presenter {
@@ -46,6 +48,8 @@ public interface ProductDetailContract {
     void onDataUpdated();
 
       void addProductToCart();
+
+      int getCartsAdded();
   }
 
   interface Router {

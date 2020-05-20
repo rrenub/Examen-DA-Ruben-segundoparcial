@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.lang.ref.WeakReference;
 
+import es.ulpgc.eite.cleancode.shoppingcart.app.ProductDetailToListState;
 import es.ulpgc.eite.cleancode.shoppingcart.app.ProductListToDetailState;
 
 public class ProductDetailPresenter implements ProductDetailContract.Presenter {
@@ -57,6 +58,12 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
     public void onBackPressed() {
         Log.e(TAG, "onBackPressed()");
 
+
+        ProductDetailToListState passedState = new ProductDetailToListState();
+        passedState.product = state.data;
+        passedState.cartsAdded = state.cartAdded;
+        router.passStateToPreviousScreen(passedState);
+        view.get().navigateToPreviousScreen();
         //TODO: falta implementacion
     }
 
@@ -75,6 +82,7 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
         Log.e(TAG, "onProductButtonTapped()");
         model.addProductToCart();
         state.data = model.getStoredData();
+        state.cartAdded = model.getCartsAdded();
         view.get().onDataUpdated(state);
         //TODO: falta implementacion
     }

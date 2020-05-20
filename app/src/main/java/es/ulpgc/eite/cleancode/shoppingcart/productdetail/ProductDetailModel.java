@@ -7,7 +7,12 @@ public class ProductDetailModel implements ProductDetailContract.Model {
     public static String TAG = ProductDetailModel.class.getSimpleName();
 
     private ProductData data;
+    private int cartsAdded;
 
+
+    public ProductDetailModel() {
+        cartsAdded = 0;
+    }
 
     @Override
     public ProductData getStoredData() {
@@ -20,7 +25,13 @@ public class ProductDetailModel implements ProductDetailContract.Model {
         if(data.content > 0) {
             data.content--;
             data.value++;
+            cartsAdded++;
         }
+    }
+
+    @Override
+    public int getCartsAdded() {
+        return cartsAdded;
     }
 
     @Override

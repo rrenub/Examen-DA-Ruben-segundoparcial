@@ -10,77 +10,81 @@ import es.ulpgc.eite.cleancode.shoppingcart.R;
 import es.ulpgc.eite.cleancode.shoppingcart.data.ProductData;
 
 public class ProductDetailActivity
-    extends AppCompatActivity implements ProductDetailContract.View {
+        extends AppCompatActivity implements ProductDetailContract.View {
 
-  public static String TAG = ProductDetailActivity.class.getSimpleName();
+    public static String TAG = ProductDetailActivity.class.getSimpleName();
 
-  private ProductDetailContract.Presenter presenter;
+    private ProductDetailContract.Presenter presenter;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_product_detail);
-    getSupportActionBar().setTitle(R.string.product_detail_title);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_product_detail);
+        getSupportActionBar().setTitle(R.string.product_detail_title);
 
-    // do the setup
-    ProductDetailScreen.configure(this);
+        // do the setup
+        ProductDetailScreen.configure(this);
 
-    if (savedInstanceState == null) {
-      presenter.onStart();
+        if (savedInstanceState == null) {
+            presenter.onStart();
 
-    } else {
-      presenter.onRestart();
+        } else {
+            presenter.onRestart();
+        }
     }
-  }
 
-  @Override
-  protected void onResume() {
-    super.onResume();
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-    // load the data
-    presenter.onResume();
-  }
+        // load the data
+        presenter.onResume();
+    }
 
-  @Override
-  public void onBackPressed() {
-    super.onBackPressed();
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
 
-    presenter.onBackPressed();
-  }
+        presenter.onBackPressed();
+    }
 
-  @Override
-  protected void onPause() {
-    super.onPause();
+    @Override
+    protected void onPause() {
+        super.onPause();
 
-    presenter.onPause();
-  }
+        presenter.onPause();
+    }
 
-  @Override
-  protected void onDestroy() {
-    super.onDestroy();
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
-    presenter.onDestroy();
-  }
+        presenter.onDestroy();
+    }
 
+    @Override
+    public void navigateToPreviousScreen() {
+        finish();
+    }
 
-  public void onProductButtonTapped(View view) {
-    presenter.onProductButtonTapped();
-  }
+    public void onProductButtonTapped(View view) {
+        presenter.onProductButtonTapped();
+    }
 
-  @Override
-  public void onDataUpdated(ProductDetailViewModel viewModel) {
-    //Log.e(TAG, "onDataUpdated()");
+    @Override
+    public void onDataUpdated(ProductDetailViewModel viewModel) {
+        //Log.e(TAG, "onDataUpdated()");
 
-    ProductData data = viewModel.data;
+        ProductData data = viewModel.data;
 
-    // deal with the data
-    ((TextView) findViewById(R.id.detailTitle)).setText(data.label());
-    ((TextView) findViewById(R.id.detailSubtitle)).setText(data.details());
-  }
+        // deal with the data
+        ((TextView) findViewById(R.id.detailTitle)).setText(data.label());
+        ((TextView) findViewById(R.id.detailSubtitle)).setText(data.details());
+    }
 
-  @Override
-  public void injectPresenter(ProductDetailContract.Presenter presenter) {
-    this.presenter = presenter;
-  }
+    @Override
+    public void injectPresenter(ProductDetailContract.Presenter presenter) {
+        this.presenter = presenter;
+    }
 
 }

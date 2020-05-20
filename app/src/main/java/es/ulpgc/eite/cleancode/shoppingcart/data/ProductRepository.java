@@ -33,6 +33,8 @@ public class ProductRepository implements RepositoryContract{
 
     @Override
     public void updateProductList(ProductData data) {
-        //TODO Implementar
+        int productIndex = products.indexOf(data);
+        products.get(productIndex).value = data.value;
+        products.get(productIndex).content = data.content;
     }
 }
